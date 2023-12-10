@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- https://dantib12.github.io/testing/test1.html -->
+<html lang="en" dir="ltr">
+<head>
+
+</head>
+<body>
+<div id="h1_container">
+    <h1>Random string generator</h1>
+    <form id="form">
+<div>
+    <label for="initial_code">Initial Code</label>
+    <input id="initial_code" placeholder="Initial characters" type="text">
+</div>
+
+<div>
+    <label for="lenght_of_characters">Length of Characters</label>
+    <input id="lenght_of_characters" placeholder="characters length" type="number">
+</div>
+<!--  
+<div>
+    <label for="total_number_of_qrcodes_needed">total number of QR Codes</label>
+    <input id="total_number_of_qrcodes_needed" placeholder="total" type="number">
+</div>
+-->
+<div>
+    <button type="submit">Generate</button>
+</div>
+    </form>
+    
+<div id="string_inner_container">
+<br>
+</div>
+<div >
+    <p id="iteration"></p>
+    <br>
+</div>
+<div id="imgBox">
+    <img src='' id="qrImage">
+    <br>
+    </div>
+    <div>
+        <p id="displayText"></p>
+        <br>
+    </div>
+
+</body>
+
+<script>
+    const form = document.getElementById('form');
+    const initial_code = document.getElementById('initial_code')
+    
+    const lenght_of_characters = document.getElementById('lenght_of_characters')
+    // const total_number_of_qrcodes_needed = document.getElementById('total_number_of_qrcodes_needed')
+
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const initial_code_value = initial_code.value;
+    const number_of_characters_value = initial_code.length;
+    const lenght_of_characters_value = lenght_of_characters.value;
+    // const total_number_of_qrcodes_needed_value = total_number_of_qrcodes_needed.value;
+
+    
+
+var imgBox = document.getElementById('imgBox');
+qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +  create_random_string(lenght_of_characters_value);
+
+
+function create_random_string(string_length){
+    var random_string = '';
+    var characters = initial_code_value;
+    
+    
+    for(var i,i = 0; i < string_length; i++){
+        random_string += characters.charAt(Math.floor(Math.random() * characters.length))
+        document.getElementById("displayText").innerHTML = "Generated QR Code For " + random_string;  
+        var string_inner_container = document.getElementById('string_inner_container');
+string_inner_container.innerHTML = 'random '+'\n' + random_string;
+
+    }
+    
+    
+
+return random_string;
+    
+    
+}
+})
+</script>
+</html>
